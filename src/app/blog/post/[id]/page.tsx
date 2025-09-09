@@ -1,20 +1,15 @@
 import { posts } from "@/app/lib/placeholder-data";
 import Post from "@/app/ui/components/posts/Post";
 
-type PageProps = {
-  params: {
-    id: string;
-  };
-};
-
-//Tell Next.js which ids exist
+// ✅ Pre-generate ids for static pages
 export function generateStaticParams() {
   return posts.map((post) => ({
     id: post.id,
   }));
 }
 
-export default async function Page({ params }: PageProps) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function Page({ params }: any) {
   const post = posts.find((post) => post.id === params.id);
 
   if (!post) {
